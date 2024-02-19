@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pairs game</title>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+  <div id="startGame" class="startgame">
+    <p>Number of cards vertically/horisontally</p>
+    <p>(even number from 2 to 10)</p>
+    <input id="startGameInput" type="number" min="2" max="10" step="2" value="4" onkeypress="return false">
+
+    <input type="radio" id="images" name="card-pic" value="1">
+    <label for="pics">Pictures</label>
+    <input type="radio" id="numbers" name="card-pic" value="0" checked>
+    <label for="numbers">Numbers</label>
+
+    <button id="buttonStart" class="buttonStart">Start ...</button>
+  </div>
+  <div class="container">
+    <div id="deck" class="deck"></div>
+  </div>
+  <p id="timeover" class="timeover">TIME IS OVER</p>
+  <button id="buttonMore" class="buttonMore">One more game</button>
+</body>
+
+</html>
