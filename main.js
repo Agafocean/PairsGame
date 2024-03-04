@@ -167,6 +167,7 @@ class AmazingCard extends Card {
   formAmCard(i) {
     if (images.checked) {
       card[i].backCardImg.src = `https://picsum.photos/id/1${shuffledDeck[i]}/320/100`;
+      card[i].backCardImg.style.height = labelHight;
     }
     else {
       card[i].backCard.textContent = card[i].cardNumber;
@@ -176,7 +177,7 @@ class AmazingCard extends Card {
       card[i].backCardImg.style.display = 'none';
       card[i].backCard.textContent = card[i].cardNumber;
     };
-    card[i].backCardImg.style.height = labelHight;
+    
     card[i].backCard.append(card[i].backCardImg);
   }
 }
