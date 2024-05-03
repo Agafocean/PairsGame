@@ -1,5 +1,5 @@
 body {
-  background: darkgray;
+  background: whitesmoke;
   color: #222;
 }
 
@@ -51,6 +51,7 @@ label {
   line-height: 100px;
   backface-visibility: hidden;
   border-radius: 2px;
+  background-image: linear-gradient(to bottom, grey, lightgrey);
 }
 
 .card .back {
@@ -70,7 +71,7 @@ input {
 
 .buttonMore {
   display: none;
-  background-color: lightblue;
+  background-color: lightgray;
   margin: 0 auto;
   font-size: 20px;
   border-radius: 10px;
@@ -89,7 +90,7 @@ input {
 }
 
 .startgame button {
-  background-color: lightblue;
+  background-color: lightgray;
   font-size: 20px;
   border-radius: 10px;
   cursor: pointer;

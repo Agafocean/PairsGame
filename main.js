@@ -108,7 +108,7 @@ class Card {
     card[i].frontCard.classList.add('front');
     card[i].backCard.classList.add('back');
 
-    card[i].frontCard.textContent = '~~~~~~';
+    card[i].frontCard.textContent = '~~';
 
     card[i].labelDeck.append(card[i].inputLabel);
     card[i].cardLabel.append(card[i].frontCard);
@@ -177,7 +177,7 @@ class AmazingCard extends Card {
       card[i].backCardImg.style.display = 'none';
       card[i].backCard.textContent = card[i].cardNumber;
     };
-    
+
     card[i].backCard.append(card[i].backCardImg);
   }
 }
