@@ -1,15 +1,20 @@
 const timeLimit = 60000;
+let startTime, currentTime, timeProgress;
+let games = localStorage.getItem("games") ? JSON.parse(localStorage.getItem("games")) : 0;
+let wins = localStorage.getItem("wins") ? JSON.parse(localStorage.getItem("wins")) : 0;
 
 const startGame = document.getElementById("startGame");
-const startGameInput = document.getElementById("startGameInput");
+const typeEls = document.getElementsByClassName("type");
+const sizeEls = document.getElementsByClassName("size");
 const buttonStart = document.getElementById("buttonStart");
 const crDeck = document.getElementById("deck");
-const timeOver = document.getElementById("timeover");
+const messageEl = document.getElementById("message");
+const rangeProgress = document.getElementById("range-progress");
+const gamesEl = document.getElementById("games");
+const winsEl = document.getElementById("wins");
 
-const images = document.getElementById("images");
-
-let numberOfColumns = startGameInput.value;
-let numberOfCards = Math.pow(numberOfColumns, 2);
+const params = { size: 4, isPictures: false };
+let numberOfCards = Math.pow(params.size, 2);
 let numberOfOpenedCards = 0;
 let playMore = true;
 
@@ -25,36 +30,56 @@ let firstPress = true;  // будем открывать первую из дв�
 let firstCardPressed = null; // номер первой нажатой карты из двух
 let clickAllowed = true;
 
-startGameInput.addEventListener('input', function () {
-  console.log(startGameInput.value);
-  if (startGameInput.value != 0) {
-    numberOfColumns = startGameInput.value;
-    numberOfCards = Math.pow(numberOfColumns, 2);
+gamesEl.textContent = `${games}`;
+winsEl.textContent = `${wins}`;
+
+Array.prototype.map.call(sizeEls, (s, ind) => {
+  s.addEventListener('click', () => {
+    for (let i = 0; i < sizeEls.length; i++) {
+      sizeEls[i].style.opacity = "0.3";
+    }
+    sizeEls[ind].style.opacity = "1";
+
+    params.size = (ind + 1) * 2;
+    numberOfCards = Math.pow(params.size, 2);
     // задаем размеры карточек в зависимости от количества строк/столбцов
-    switch (numberOfColumns) {
-      case "2":
-      case "4":
+    switch (params.size) {
+      case 2:
+      case 4:
         labelFlexBasis = "20%";
         labelHight = "100px";
         labelFontSize = "50px";
         break;
-      case "6":
+      case 6:
         labelFlexBasis = "15%";
         labelHight = "60px";
         labelFontSize = "40px";
         break;
-      case "8":
+      case 8:
         labelFlexBasis = "11%";
         labelHight = "45px";
         labelFontSize = "30px";
         break;
-      case "10":
+      case 10:
         labelFlexBasis = "9%";
         labelHight = "35px";
         labelFontSize = "25px";
         break;
     }
-  }
+
+  })
+});
+
+Array.prototype.map.call(typeEls, (s, ind) => {
+  s.addEventListener('click', () => {
+    for (let i = 0; i < typeEls.length; i++) {
+      typeEls[i].style.opacity = "0.3";
+    }
+    typeEls[ind].style.opacity = "1";
+
+    params.isPictures = ind === 1 ? true : false;
+
+  })
 });
 
 function turnBack(i, j) {
@@ -66,17 +91,33 @@ function turnBack(i, j) {
 }
 
 // нажатие на кнопку старт
-buttonStart.addEventListener('click', function () {
+buttonStart.addEventListener('click', () => {
+  startTime = Date.now();
+  timeProgress = setInterval(() => {
+    currentTime = Date.now();
+    const width = ((currentTime - startTime) / timeLimit) * 100;
+    rangeProgress.style = `width: ${width}%`;
+  }, 50);
+
   startGame.style.display = "none";
   // открываем игровое поле
   crDeck.style.display = "flex";
   openPairsGame();
+
   // если время истекло (timeLimit)
   setTimeout(() => {
-    console.log("Время истекло");
-    crDeck.style.display = "none";
-    timeOver.style.display = "block";
-    buttonMore.style.display = "block";
+    games++;
+    localStorage.setItem("games", JSON.stringify(games));
+    clearInterval(timeProgress);
+    crDeck.style.cursor = "not-allowed";
+    card.map((c, i) => card[i].labelDeck.classList = "disabled");
+
+    if (buttonMore.style.display !== "block") {
+      messageEl.style.color = "red";
+      messageEl.textContent = "TIME is OVER";
+      buttonMore.style.display = "block";
+    };
+
     buttonMore.addEventListener('click', function () {
       location.reload();
       buttonMore.style.display = "none";
@@ -97,6 +138,7 @@ class Card {
   }
 
   formCard(i) {
+    card[i].labelDeck.style = "outline: 3px solid darkblue";
     card[i].labelDeck.style.flexBasis = labelFlexBasis;
     card[i].labelDeck.style.height = labelHight;
     card[i].labelDeck.style.fontSize = labelFontSize;
@@ -144,13 +186,19 @@ class Card {
               numberOfOpenedCards = numberOfOpenedCards + 2;
               // если открыты все карты
               if (numberOfOpenedCards == numberOfCards) {
+                clearInterval(timeProgress);
+                games++; wins++;
+                localStorage.setItem("games", JSON.stringify(games));
+                localStorage.setItem("wins", JSON.stringify(wins));
                 setTimeout(function () {
+                  messageEl.style.color = "green";
+                  messageEl.textContent = "CONGRATULATIONS!";
                   buttonMore.style.display = "block";
                   buttonMore.addEventListener('click', function () {
                     location.reload();
                     buttonMore.style.display = "none";
                   });
-                }, 1000)
+                }, 500)
               }
             }
           }
@@ -165,7 +213,7 @@ class AmazingCard extends Card {
   backCardImg = document.createElement("img");
 
   formAmCard(i) {
-    if (images.checked) {
+    if (params.isPictures) {
       card[i].backCardImg.src = `https://picsum.photos/id/1${shuffledDeck[i]}/320/100`;
       card[i].backCardImg.style.height = labelHight;
     }

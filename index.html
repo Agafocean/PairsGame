@@ -12,22 +12,42 @@
 
 <body>
   <div id="startGame" class="startgame">
-    <p>Number of cards vertically/horisontally</p>
-    <p>(even number from 2 to 10)</p>
-    <input id="startGameInput" type="number" min="2" max="10" step="2" value="4" onkeypress="return false">
+    <div class="title">PAIRS MEMORY GAME</div>
 
-    <input type="radio" id="images" name="card-pic" value="1">
-    <label for="pics">Pictures</label>
-    <input type="radio" id="numbers" name="card-pic" value="0" checked>
-    <label for="numbers">Numbers</label>
+    <div class="types">
+      <button class="type">Numbers</button>
+      <button class="type">Pictures</button>
+    </div>
 
-    <button id="buttonStart" class="buttonStart">Start ...</button>
+    <div class="sizes">
+      <button class="size">2x2</button>
+      <button class="size">4x4</button>
+      <button class="size">6x6</button>
+      <button class="size">8x8</button>
+      <button class="size">10x10</button>
+    </div>
+
+    <img class="gamepic" src="gamepic.jpg" />
+    <button id="buttonStart" class="buttonStart">START</button>
+
+    <div class="games"> <span>games:</span> <span id="games"></span>
+      <div class="wins"> <span>wins:</span> <span id="wins"></span> </div>
+    </div>
+
   </div>
+
   <div class="container">
-    <div id="deck" class="deck"></div>
+    <div id="deck" class="deck"> </div>
   </div>
-  <p id="timeover" class="timeover">TIME IS OVER</p>
-  <button id="buttonMore" class="buttonMore">One more game</button>
+
+  <div class="range" id="range">
+    <div class="range-progress" id="range-progress"> </div>
+  </div>
+
+  <p id="message" class="message"></p>
+
+  <button id="buttonMore" class="buttonMore">New game</button>
+
 </body>
 
 </html>
