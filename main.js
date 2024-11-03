@@ -1,11 +1,12 @@
-const timeLimit = 60000;
 let startTime, currentTime, timeProgress;
 let games = localStorage.getItem("games") ? JSON.parse(localStorage.getItem("games")) : 0;
 let wins = localStorage.getItem("wins") ? JSON.parse(localStorage.getItem("wins")) : 0;
 
 const startGame = document.getElementById("startGame");
+const options = document.getElementById("options");
 const typeEls = document.getElementsByClassName("type");
 const sizeEls = document.getElementsByClassName("size");
+const timeEls = document.getElementsByClassName("time");
 const buttonStart = document.getElementById("buttonStart");
 const crDeck = document.getElementById("deck");
 const messageEl = document.getElementById("message");
@@ -13,12 +14,12 @@ const rangeProgress = document.getElementById("range-progress");
 const gamesEl = document.getElementById("games");
 const winsEl = document.getElementById("wins");
 
-const params = { size: 4, isPictures: false };
+const params = { size: 4, isPictures: false, timeLimit: 60000 };
 let numberOfCards = Math.pow(params.size, 2);
 let numberOfOpenedCards = 0;
 let playMore = true;
 
-let labelFlexBasis = "20%";
+let labelFlexBasis = "23%";
 let labelHight = "100px";
 let labelFontSize = "50px";
 
@@ -29,7 +30,6 @@ const card = [];
 let firstPress = true;  // будем открывать первую из двух карт
 let firstCardPressed = null; // номер первой нажатой карты из двух
 let clickAllowed = true;
-
 gamesEl.textContent = `${games}`;
 winsEl.textContent = `${wins}`;
 
@@ -40,13 +40,12 @@ Array.prototype.map.call(sizeEls, (s, ind) => {
     }
     sizeEls[ind].style.opacity = "1";
 
-    params.size = (ind + 1) * 2;
+    params.size = (ind + 2) * 2;
     numberOfCards = Math.pow(params.size, 2);
     // задаем размеры карточек в зависимости от количества строк/столбцов
     switch (params.size) {
-      case 2:
       case 4:
-        labelFlexBasis = "20%";
+        labelFlexBasis = "23%";
         labelHight = "100px";
         labelFontSize = "50px";
         break;
@@ -55,18 +54,8 @@ Array.prototype.map.call(sizeEls, (s, ind) => {
         labelHight = "60px";
         labelFontSize = "40px";
         break;
-      case 8:
-        labelFlexBasis = "11%";
-        labelHight = "45px";
-        labelFontSize = "30px";
-        break;
-      case 10:
-        labelFlexBasis = "9%";
-        labelHight = "35px";
-        labelFontSize = "25px";
-        break;
-    }
-
+    };
+    openPairsGame();
   })
 });
 
@@ -78,7 +67,17 @@ Array.prototype.map.call(typeEls, (s, ind) => {
     typeEls[ind].style.opacity = "1";
 
     params.isPictures = ind === 1 ? true : false;
+  })
+});
 
+Array.prototype.map.call(timeEls, (s, ind) => {
+  s.addEventListener('click', () => {
+    for (let i = 0; i < timeEls.length; i++) {
+      timeEls[i].style.opacity = "0.3";
+    }
+    timeEls[ind].style.opacity = "1";
+
+    params.timeLimit = 30000 * (ind + 1);
   })
 });
 
@@ -90,40 +89,6 @@ function turnBack(i, j) {
   clickAllowed = true;
 }
 
-// нажатие на кнопку старт
-buttonStart.addEventListener('click', () => {
-  startTime = Date.now();
-  timeProgress = setInterval(() => {
-    currentTime = Date.now();
-    const width = ((currentTime - startTime) / timeLimit) * 100;
-    rangeProgress.style = `width: ${width}%`;
-  }, 50);
-
-  startGame.style.display = "none";
-  // открываем игровое поле
-  crDeck.style.display = "flex";
-  openPairsGame();
-
-  // если время истекло (timeLimit)
-  setTimeout(() => {
-    games++;
-    localStorage.setItem("games", JSON.stringify(games));
-    clearInterval(timeProgress);
-    crDeck.style.cursor = "not-allowed";
-    card.map((c, i) => card[i].labelDeck.classList = "disabled");
-
-    if (buttonMore.style.display !== "block") {
-      messageEl.style.color = "red";
-      messageEl.textContent = "TIME is OVER";
-      buttonMore.style.display = "block";
-    };
-
-    buttonMore.addEventListener('click', function () {
-      location.reload();
-      buttonMore.style.display = "none";
-    });
-  }, timeLimit);
-});
 
 class Card {
   open = false;  // карта открыта или нет
@@ -157,7 +122,7 @@ class Card {
     card[i].cardLabel.append(card[i].backCard);
     card[i].labelDeck.append(card[i].cardLabel);
 
-    card[i].labelDeck.addEventListener('click', function (e) {
+    card[i].labelDeck.addEventListener('click', (e) => {
       e.preventDefault();
 
       if (!card[i].open && clickAllowed) {
@@ -185,19 +150,17 @@ class Card {
               card[firstCardPressed].labelDeck.style.cursor = "not-allowed";
               numberOfOpenedCards = numberOfOpenedCards + 2;
               // если открыты все карты
+              console.log(numberOfOpenedCards, numberOfCards);
               if (numberOfOpenedCards == numberOfCards) {
                 clearInterval(timeProgress);
                 games++; wins++;
                 localStorage.setItem("games", JSON.stringify(games));
                 localStorage.setItem("wins", JSON.stringify(wins));
-                setTimeout(function () {
+                setTimeout(() => {
+                  crDeck.style.opacity = "0.2";
                   messageEl.style.color = "green";
                   messageEl.textContent = "CONGRATULATIONS!";
-                  buttonMore.style.display = "block";
-                  buttonMore.addEventListener('click', function () {
-                    location.reload();
-                    buttonMore.style.display = "none";
-                  });
+                  options.classList.remove("disabled");
                 }, 500)
               }
             }
@@ -221,7 +184,7 @@ class AmazingCard extends Card {
       card[i].backCard.textContent = card[i].cardNumber;
     }
 
-    card[i].backCardImg.onerror = function () {
+    card[i].backCardImg.onerror = () => {
       card[i].backCardImg.style.display = 'none';
       card[i].backCard.textContent = card[i].cardNumber;
     };
@@ -231,6 +194,9 @@ class AmazingCard extends Card {
 }
 
 function openPairsGame() {
+  crDeck.innerHTML = "";
+  messageEl.textContent = "";
+  numberOfOpenedCards = 0;
   // начальная колода
   initDeck = [];
   for (let i = 1; i <= numberOfCards / 2; i++) {
@@ -256,3 +222,32 @@ function openPairsGame() {
     card[i].formAmCard(i);
   }
 }
+
+// нажатие на кнопку старт
+buttonStart.addEventListener('click', () => {
+  openPairsGame();
+  console.log("params", params);
+options.classList.add("disabled");
+  crDeck.style.opacity = "1";
+  startTime = Date.now();
+  timeProgress = setInterval(() => {
+    currentTime = Date.now();
+    const width = ((currentTime - startTime) / params.timeLimit) * 100;
+    rangeProgress.style = `width: ${width}%`;
+
+    if (width > 100) {
+      games++;
+      localStorage.setItem("games", JSON.stringify(games));
+      clearInterval(timeProgress);
+      crDeck.style.cursor = "not-allowed";
+      card.map((c, i) => card[i].labelDeck.classList = "disabled");
+
+      crDeck.style.opacity = "0.2";
+      messageEl.style.color = "red";
+      messageEl.textContent = "TIME is OVER";
+      options.classList.remove("disabled");
+    };
+  }, 50);
+});
+
+openPairsGame();

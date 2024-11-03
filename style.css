@@ -13,7 +13,9 @@ button {
   background-color: #a6ccf7;
   outline: 2px solid darkblue;
   cursor: pointer;
+  font-size: 20px;
   border-radius: 10px;
+  opacity: 0.3;
 }
 
 button:hover {
@@ -35,59 +37,43 @@ button:hover {
 .title {
   font-size: 40px;
   color: darkblue;
-  border-top: 3px solid darkblue;
-  border-bottom: 2px solid darkblue;
-  margin-bottom: 40px;
-}
-
-.types {
   margin-bottom: 30px;
 }
 
-.type:not(:last-child) {
-  margin-right: 30px;
+.options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
-.type {
-  font-size: 36px;
+.type:nth-child(1) {
+  opacity: 1;
 }
 
-.type:nth-child(2) {
-  opacity: 0.3;
+.size:nth-child(4) {
+  opacity: 1;
 }
 
-.sizes {
-  margin-bottom: 50px;
-}
-
-.size {
-  font-size: 24px;
-  opacity: 0.3;
-}
-
-.size:not(:last-child) {
-  margin-right: 10px;
-}
-
-.size:nth-child(2) {
+.time:nth-child(8) {
   opacity: 1;
 }
 
 .gamepic {
-  width: 250px;
-  margin-bottom: 30px;
+  width: 300px;
+  margin-bottom: 20px;
 }
 
 .buttonStart {
-  font-size: 40px;
-  padding: 40px 10px;
-  border-radius: 50%;
+  font-size: 30px;
+  padding: 0 100px;
   margin-bottom: 10px;
+  opacity: 1;
 }
 
 .games {
   position: relative;
   color: darkblue;
+  margin-bottom: 40px;
 }
 
 .wins {
@@ -98,9 +84,12 @@ button:hover {
 }
 
 .container {
-  max-width: 1800px;
+  position: relative;
+  min-width: 320px;
+	max-width: 1440px;
+	width: 100%;
   margin: 0 auto;
-  padding: 15px;
+ /* padding: 15px;*/
 }
 
 .range {
@@ -116,19 +105,21 @@ button:hover {
 }
 
 .deck {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  opacity: 0.2;
+  padding: 20px;
 }
 
 label {
-  flex-basis: 20%;
+  flex-basis: 23%;
   height: 100px;
   perspective: 1000px;
   transform-style: preserve-3d;
   display: block;
   cursor: pointer;
-  margin-right: 10px;
+ /* margin-right: 10px;*/
   margin-bottom: 10px;
   font-size: 50px;
 }
@@ -183,7 +174,11 @@ input {
 }
 
 .message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: green;
-  font-size: 36px;
+  font-size: 100px;
   text-align: center;
 }
