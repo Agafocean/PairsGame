@@ -2,7 +2,7 @@ let startTime, currentTime, timeProgress;
 let games = localStorage.getItem("games") ? JSON.parse(localStorage.getItem("games")) : 0;
 let wins = localStorage.getItem("wins") ? JSON.parse(localStorage.getItem("wins")) : 0;
 
-const options = document.getElementById("options");
+const startGame = document.getElementById("startGame");
 const typeEls = document.getElementsByClassName("type");
 const sizeEls = document.getElementsByClassName("size");
 const timeEls = document.getElementsByClassName("time");
@@ -18,7 +18,7 @@ let numberOfCards = Math.pow(params.size, 2);
 let numberOfOpenedCards = 0;
 let playMore = true;
 
-let labelFlexBasis = "23%";
+let labelFlexBasis = "22%";
 let labelHeight = labelFlexBasis/2; //"100px";
 let labelFontSize = "50px";
 
@@ -45,12 +45,12 @@ Array.prototype.map.call(sizeEls, (s, ind) => {
     // задаем размеры карточек в зависимости от количества строк/столбцов
     switch (params.size) {
       case 4:
-        labelFlexBasis = "23%";
+        labelFlexBasis = "22%";
         labelHeight = labelFlexBasis/2;  //"100px";
         labelFontSize = "50px";
         break;
       case 6:
-        labelFlexBasis = "15%";
+        labelFlexBasis = "14%";
         labelHeight = "60px";
         labelFontSize = "40px";
         break;
@@ -160,8 +160,8 @@ class Card {
                   card.map((c, i) => card[i].labelDeck.classList = "disabled");
                   messageEl.style.color = "green";
                   messageEl.textContent = "CONGRATULATIONS!";
-                  options.classList.remove("disabled");
-                  buttonStart.classList.remove("disabled");
+                  startGame.classList.remove("disabled");
+               //   buttonStart.classList.remove("disabled");
                 }, 500)
               }
             }
@@ -231,8 +231,8 @@ function openPairsGame() {
 buttonStart.addEventListener('click', () => {
   openPairsGame();
   console.log("params", params);
-  options.classList.add("disabled");
-  buttonStart.classList.add("disabled");
+  startGame.classList.add("disabled");
+ // buttonStart.classList.add("disabled");
   crDeck.style.cursor = "all";
   card.map((c, i) => card[i].labelDeck.classList = "");
   startTime = Date.now();
@@ -250,8 +250,8 @@ buttonStart.addEventListener('click', () => {
 
       messageEl.style.color = "red";
       messageEl.textContent = "TIME is OVER";
-      options.classList.remove("disabled");
-      buttonStart.classList.remove("disabled");
+      startGame.classList.remove("disabled");
+    // buttonStart.classList.remove("disabled");
     };
   }, 50);
 });

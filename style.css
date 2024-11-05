@@ -40,12 +40,12 @@ button:hover {
 .deck {
   display: flex;
   flex-wrap: wrap;
-  gap: 2%;
+  gap: 3%;
   padding: 20px;
 }
 
 label {
-  flex-basis: 23%;
+  flex-basis: 22%;
   height: 100px;
   perspective: 1000px;
   transform-style: preserve-3d;
@@ -112,21 +112,28 @@ input {
   padding: 30px;
 }
 
-.options,
+.options {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.typesize,
 .times {
   display: flex;
   gap: 10px;
-}
-
-.times {
-  margin-bottom: 30px;
 }
 
 .type:nth-child(1) {
   opacity: 1;
 }
 
-.size:nth-child(4) {
+.type:nth-child(2) {
+  margin-right: 20px;
+}
+
+.size:nth-child(3) {
   opacity: 1;
 }
 
@@ -233,9 +240,13 @@ input {
     font-size: 50px;
   }
 
-  .options *,
+  /*.options *,
   .times * {
     font-size: 12px;
+  }*/
+
+  .options {
+    flex-direction: column;
   }
 }
 
@@ -261,14 +272,6 @@ input {
     padding: 10px;
   }
 
-  .deck {
-    gap: 3%;
-  }
-
-  label {
-    flex-basis: 21%;
-  }
-
   .message {
     font-size: 25px;
   }
@@ -276,10 +279,6 @@ input {
   .options *,
   .times * {
     font-size: 10px;
-  }
-
-  .times {
-    margin-bottom: 20px;
   }
 
   .buttonStart {

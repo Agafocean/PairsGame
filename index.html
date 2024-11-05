@@ -22,27 +22,28 @@
 
   <div id="startGame" class="startgame">
     <div id="options" class="options">
-      <button class="type">Numbers</button>
-      <button class="type">Pictures</button>
-      <span>~</span>
-      <button class="size">4x4</button>
-      <button class="size">6x6</button>
+      <div class="typesize">
+        <button class="type">Numbers</button>
+        <button class="type">Pictures</button>
+        <button class="size">4x4</button>
+        <button class="size">6x6</button>
+      </div>
+      <div id="times" class="times">
+        <button class="time">30 sec</button>
+        <button class="time">60 sec</button>
+        <button class="time">90 sec</button>
+        <button class="time">120 sec</button>
+        <button class="time">180 sec</button>
+      </div>
     </div>
-    <div id="times" class="times" >
-      <button class="time">30 sec</button>
-      <button class="time">60 sec</button>
-      <button class="time">90 sec</button>
-      <button class="time">120 sec</button>
-      <button class="time">180 sec</button>
+
+    <button id="buttonStart" class="buttonStart">START</button>
+
+    <div class="games"> <span>games:</span> <span id="games"></span>
+      <div class="wins"> <span>wins:</span> <span id="wins"></span> </div>
     </div>
 
-  <button id="buttonStart" class="buttonStart">START</button>
-
-  <div class="games"> <span>games:</span> <span id="games"></span>
-    <div class="wins"> <span>wins:</span> <span id="wins"></span> </div>
-  </div>
-
-  <img class="gamepic" src="gamepic.jpg" />
+    <img class="gamepic" src="gamepic.jpg" />
 
   </div>
 
