@@ -240,7 +240,7 @@ input {
   }
 
   .message {
-    font-size: 46px;
+    font-size: 42px;
   }
 
   .options {
@@ -275,10 +275,10 @@ input {
     font-size: 25px;
   }
 
-  .options *,
+  /*.options *,
   .times * {
     font-size: 10px;
-  }
+  }*/
 
   .buttonStart {
     font-size: 20px;
