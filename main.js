@@ -19,7 +19,7 @@ let numberOfOpenedCards = 0;
 let playMore = true;
 
 let labelFlexBasis = "22%";
-let labelHeight = labelFlexBasis/2; //"100px";
+let labelHeight = labelFlexBasis / 2; //"100px";
 let labelFontSize = "50px";
 
 let initDeck = [];
@@ -46,7 +46,7 @@ Array.prototype.map.call(sizeEls, (s, ind) => {
     switch (params.size) {
       case 4:
         labelFlexBasis = "22%";
-        labelHeight = labelFlexBasis/2;  //"100px";
+        labelHeight = labelFlexBasis / 2;  //"100px";
         labelFontSize = "50px";
         break;
       case 6:
@@ -89,7 +89,6 @@ function turnBack(i, j) {
   clickAllowed = true;
 }
 
-
 class Card {
   open = false;  // карта открыта или нет
   labelDeck = document.createElement("label");
@@ -105,10 +104,6 @@ class Card {
   formCard(i) {
     card[i].labelDeck.style = "outline: 3px solid darkblue";
     card[i].labelDeck.style.flexBasis = labelFlexBasis;
-  //  card[i].labelDeck.style.height = labelHeight;
-   // card[i].labelDeck.style.fontSize = labelFontSize;
-  //  card[i].frontCard.style.lineHeight = labelHeight;
- //  card[i].backCard.style.lineHeight = labelHeight;
 
     card[i].inputLabel.type = 'checkbox';
     card[i].cardLabel.classList.add('card');
@@ -161,7 +156,6 @@ class Card {
                   messageEl.style.color = "green";
                   messageEl.textContent = "CONGRATULATIONS!";
                   startGame.classList.remove("disabled");
-               //   buttonStart.classList.remove("disabled");
                 }, 500)
               }
             }
@@ -179,7 +173,6 @@ class AmazingCard extends Card {
   formAmCard(i) {
     if (params.isPictures) {
       card[i].backCardImg.src = `https://picsum.photos/id/1${shuffledDeck[i]}/320/100`;
-    //  card[i].backCardImg.style.height = labelHeight;
     }
     else {
       card[i].backCard.textContent = card[i].cardNumber;
@@ -232,7 +225,6 @@ buttonStart.addEventListener('click', () => {
   openPairsGame();
   console.log("params", params);
   startGame.classList.add("disabled");
- // buttonStart.classList.add("disabled");
   crDeck.style.cursor = "all";
   card.map((c, i) => card[i].labelDeck.classList = "");
   startTime = Date.now();
@@ -251,7 +243,6 @@ buttonStart.addEventListener('click', () => {
       messageEl.style.color = "red";
       messageEl.textContent = "TIME is OVER";
       startGame.classList.remove("disabled");
-    // buttonStart.classList.remove("disabled");
     };
   }, 50);
 });
