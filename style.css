@@ -40,7 +40,7 @@ button:hover {
 .deck {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 2%;
   padding: 20px;
 }
 
@@ -257,18 +257,10 @@ input {
 }
 
 @media screen and (max-width: 576px) {
-  .deck, .startgame {
+
+  .deck,
+  .startgame {
     padding: 10px;
-  }
-
-  label {
-    flex-basis: 21%;
-   /* height: 25px;
-    font-size: 20px;*/
-  }
-
-  .card div {
-    line-height: 25px;
   }
 
   .message {
@@ -281,7 +273,7 @@ input {
   }
 
   .times {
-    margin-bottom: 20px;
+  /*  margin-bottom: 20px;*/
   }
 
   .buttonStart {
@@ -290,7 +282,7 @@ input {
   }
 
   .games {
-    margin-bottom: 30px;
+   /* margin-bottom: 30px;*/
   }
 
   .gamepic {
