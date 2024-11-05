@@ -16,7 +16,7 @@ button {
   cursor: pointer;
   font-size: 20px;
   border-radius: 10px;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 button:hover {
@@ -262,8 +262,9 @@ input {
   }
 
   label {
-    height: 25px;
-    font-size: 20px;
+    flex-basis: 21%;
+   /* height: 25px;
+    font-size: 20px;*/
   }
 
   .card div {
