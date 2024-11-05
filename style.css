@@ -275,8 +275,13 @@ input {
     font-size: 25px;
   }
 
-  .typesize *, .times * {
+  .typesize *,
+  .times * {
     font-size: 14px;
+  }
+
+  .options {
+    margin-bottom: 20px;
   }
 
   .buttonStart {
