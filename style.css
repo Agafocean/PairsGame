@@ -263,6 +263,14 @@ input {
     padding: 10px;
   }
 
+  .deck {
+    gap: 4%;
+  }
+
+  label {
+    flex-basis: 21%;
+  }
+
   .message {
     font-size: 25px;
   }
@@ -273,16 +281,16 @@ input {
   }
 
   .times {
-  /*  margin-bottom: 20px;*/
+    margin-bottom: 20px;
   }
 
   .buttonStart {
     font-size: 20px;
-    padding: 0 30px;
+    padding: 20px 30px;
   }
 
   .games {
-   /* margin-bottom: 30px;*/
+    margin-bottom: 30px;
   }
 
   .gamepic {
