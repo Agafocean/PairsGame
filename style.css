@@ -272,6 +272,10 @@ input {
     padding: 10px;
   }
 
+  .type:nth-child(2) {
+    margin-right: 0;
+  }
+
   .message {
     font-size: 40px;
   }
@@ -282,7 +286,6 @@ input {
   }
 
   .options {
-    gap: 15px;
     margin-bottom: 20px;
   }
 
