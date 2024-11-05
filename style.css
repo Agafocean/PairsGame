@@ -6,6 +6,7 @@ body {
 img {
   display: block;
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -40,6 +41,7 @@ button:hover {
 .deck {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 3%;
   padding: 20px;
 }
@@ -162,6 +164,7 @@ input {
 
 .gamepic {
   width: 300px;
+  margin-bottom: 20px;
 }
 
 .message {
@@ -237,16 +240,12 @@ input {
   }
 
   .message {
-    font-size: 50px;
+    font-size: 46px;
   }
-
-  /*.options *,
-  .times * {
-    font-size: 12px;
-  }*/
 
   .options {
     flex-direction: column;
+    gap: 10px;
   }
 }
 

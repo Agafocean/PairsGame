@@ -178,7 +178,7 @@ class AmazingCard extends Card {
 
   formAmCard(i) {
     if (params.isPictures) {
-      card[i].backCardImg.src = `https://picsum.photos/id/1${shuffledDeck[i]}/320/100`;
+      card[i].backCardImg.src = `https://picsum.photos/id/1${shuffledDeck[i]}/320`;
     //  card[i].backCardImg.style.height = labelHeight;
     }
     else {
