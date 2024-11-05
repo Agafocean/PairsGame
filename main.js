@@ -2,7 +2,6 @@ let startTime, currentTime, timeProgress;
 let games = localStorage.getItem("games") ? JSON.parse(localStorage.getItem("games")) : 0;
 let wins = localStorage.getItem("wins") ? JSON.parse(localStorage.getItem("wins")) : 0;
 
-const startGame = document.getElementById("startGame");
 const options = document.getElementById("options");
 const typeEls = document.getElementsByClassName("type");
 const sizeEls = document.getElementsByClassName("size");
@@ -20,7 +19,7 @@ let numberOfOpenedCards = 0;
 let playMore = true;
 
 let labelFlexBasis = "23%";
-let labelHight = "100px";
+let labelHeight = labelFlexBasis/2; //"100px";
 let labelFontSize = "50px";
 
 let initDeck = [];
@@ -30,6 +29,7 @@ const card = [];
 let firstPress = true;  // будем открывать первую из двух карт
 let firstCardPressed = null; // номер первой нажатой карты из двух
 let clickAllowed = true;
+
 gamesEl.textContent = `${games}`;
 winsEl.textContent = `${wins}`;
 
@@ -46,12 +46,12 @@ Array.prototype.map.call(sizeEls, (s, ind) => {
     switch (params.size) {
       case 4:
         labelFlexBasis = "23%";
-        labelHight = "100px";
+        labelHeight = labelFlexBasis/2;  //"100px";
         labelFontSize = "50px";
         break;
       case 6:
         labelFlexBasis = "15%";
-        labelHight = "60px";
+        labelHeight = "60px";
         labelFontSize = "40px";
         break;
     };
@@ -105,10 +105,10 @@ class Card {
   formCard(i) {
     card[i].labelDeck.style = "outline: 3px solid darkblue";
     card[i].labelDeck.style.flexBasis = labelFlexBasis;
-    card[i].labelDeck.style.height = labelHight;
-    card[i].labelDeck.style.fontSize = labelFontSize;
-    card[i].frontCard.style.lineHeight = labelHight;
-    card[i].backCard.style.lineHeight = labelHight;
+  //  card[i].labelDeck.style.height = labelHeight;
+   // card[i].labelDeck.style.fontSize = labelFontSize;
+  //  card[i].frontCard.style.lineHeight = labelHeight;
+ //  card[i].backCard.style.lineHeight = labelHeight;
 
     card[i].inputLabel.type = 'checkbox';
     card[i].cardLabel.classList.add('card');
@@ -150,17 +150,18 @@ class Card {
               card[firstCardPressed].labelDeck.style.cursor = "not-allowed";
               numberOfOpenedCards = numberOfOpenedCards + 2;
               // если открыты все карты
-              console.log(numberOfOpenedCards, numberOfCards);
               if (numberOfOpenedCards == numberOfCards) {
                 clearInterval(timeProgress);
                 games++; wins++;
                 localStorage.setItem("games", JSON.stringify(games));
                 localStorage.setItem("wins", JSON.stringify(wins));
                 setTimeout(() => {
-                  crDeck.style.opacity = "0.2";
+                  crDeck.style.cursor = "not-allowed";
+                  card.map((c, i) => card[i].labelDeck.classList = "disabled");
                   messageEl.style.color = "green";
                   messageEl.textContent = "CONGRATULATIONS!";
                   options.classList.remove("disabled");
+                  buttonStart.classList.remove("disabled");
                 }, 500)
               }
             }
@@ -178,7 +179,7 @@ class AmazingCard extends Card {
   formAmCard(i) {
     if (params.isPictures) {
       card[i].backCardImg.src = `https://picsum.photos/id/1${shuffledDeck[i]}/320/100`;
-      card[i].backCardImg.style.height = labelHight;
+    //  card[i].backCardImg.style.height = labelHeight;
     }
     else {
       card[i].backCard.textContent = card[i].cardNumber;
@@ -221,14 +222,19 @@ function openPairsGame() {
     card[i].formCard(i);
     card[i].formAmCard(i);
   }
+
+  crDeck.style.cursor = "not-allowed";
+  card.map((c, i) => card[i].labelDeck.classList = "disabled");
 }
 
 // нажатие на кнопку старт
 buttonStart.addEventListener('click', () => {
   openPairsGame();
   console.log("params", params);
-options.classList.add("disabled");
-  crDeck.style.opacity = "1";
+  options.classList.add("disabled");
+  buttonStart.classList.add("disabled");
+  crDeck.style.cursor = "all";
+  card.map((c, i) => card[i].labelDeck.classList = "");
   startTime = Date.now();
   timeProgress = setInterval(() => {
     currentTime = Date.now();
@@ -242,10 +248,10 @@ options.classList.add("disabled");
       crDeck.style.cursor = "not-allowed";
       card.map((c, i) => card[i].labelDeck.classList = "disabled");
 
-      crDeck.style.opacity = "0.2";
       messageEl.style.color = "red";
       messageEl.textContent = "TIME is OVER";
       options.classList.remove("disabled");
+      buttonStart.classList.remove("disabled");
     };
   }, 50);
 });
