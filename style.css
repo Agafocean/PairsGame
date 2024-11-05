@@ -53,7 +53,7 @@ button:hover {
   transform: translate(-50%, -50%);
   width: 100%;
   color: green;
-  font-size: 110px;
+  font-size: 78px;
   text-align: center;
 }
 
@@ -241,7 +241,7 @@ input {
   }
 
   .message {
-    font-size: 72px;
+    font-size: 52px;
   }
 
   .options {
@@ -277,7 +277,7 @@ input {
   }
 
   .message {
-    font-size: 40px;
+    font-size: 28px;
   }
 
   .typesize *,
