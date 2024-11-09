@@ -175,7 +175,12 @@ input {
 
 .gamepic {
   width: 300px;
-  margin-bottom: 20px;
+ /* margin-bottom: 20px;*/
+}
+
+.rules {
+  text-align: center;
+  color: darkblue;
 }
 
 .footer {
