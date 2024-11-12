@@ -148,6 +148,8 @@ class Card {
               if (numberOfOpenedCards == numberOfCards) {
                 clearInterval(timeProgress);
                 games++; wins++;
+                gamesEl.textContent = `${games}`;
+                winsEl.textContent = `${wins}`;
                 localStorage.setItem("games", JSON.stringify(games));
                 localStorage.setItem("wins", JSON.stringify(wins));
                 setTimeout(() => {
@@ -235,6 +237,7 @@ buttonStart.addEventListener('click', () => {
 
     if (width > 100) {
       games++;
+      gamesEl.textContent = `${games}`;
       localStorage.setItem("games", JSON.stringify(games));
       clearInterval(timeProgress);
       crDeck.style.cursor = "not-allowed";
