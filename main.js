@@ -78,6 +78,7 @@ Array.prototype.map.call(timeEls, (s, ind) => {
     timeEls[ind].style.opacity = "1";
 
     params.timeLimit = 30000 * (ind + 1);
+    if (ind === 4) params.timeLimit = 180000;
   })
 });
 
