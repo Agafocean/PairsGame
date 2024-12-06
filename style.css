@@ -91,6 +91,7 @@ label {
 }
 
 .card .back {
+  vertical-align: middle;
   background: #a6ccf7;
   color: darkblue;
   transform: rotateX(180deg);

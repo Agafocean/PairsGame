@@ -105,13 +105,17 @@ class Card {
   formCard(i) {
     card[i].labelDeck.style = "outline: 3px solid darkblue";
     card[i].labelDeck.style.flexBasis = labelFlexBasis;
+    card[i].labelDeck.style.height = labelHeight;
+    card[i].labelDeck.style.fontSize = labelFontSize;
 
     card[i].inputLabel.type = 'checkbox';
     card[i].cardLabel.classList.add('card');
     card[i].frontCard.classList.add('front');
     card[i].backCard.classList.add('back');
 
+    card[i].frontCard.style.lineHeight = labelHeight;
     card[i].frontCard.textContent = '~~';
+    card[i].backCard.style.lineHeight = labelHeight;
 
     card[i].labelDeck.append(card[i].inputLabel);
     card[i].cardLabel.append(card[i].frontCard);
